@@ -7,7 +7,7 @@ const router = useRouter();
 </script>
 
 <template>
-  <div class="flex flex-row align-items-center justify-content-evenly">
+  <div id="home-page" class="flex flex-row align-items-center justify-content-evenly">
     <section class="flex flex-column align-items-center">
       <h3>Somos especialistas em fazer sonhos em 2 rodas, venha conferir as maravilhas da Indústria 4.0!</h3>
     </section>

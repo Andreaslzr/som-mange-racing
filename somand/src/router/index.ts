@@ -1,9 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import MotoView from '@/views/MotoView.vue'
-import NotFoundView from '@/views/NotFoundView.vue'
-import loginview from '@/views/loginview.vue'
-import Loginview from '@/views/loginview.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import NotFoundView from '@/views/NotFoundView.vue';
+import Loginview from '@/views/loginview.vue';
+import CategoriaView from '@/views/CategoriaView.vue';
+import CustomView from '@/views/CustomView.vue';
+import CrossView from '@/views/CrossView.vue';
+import NimbusView from '@/views/NimbusView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,9 +16,28 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/moto',
-      name: 'moto',
-      component: MotoView
+      path: '/categoria',
+      name: 'categoria',
+      component: CategoriaView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/custom',
+      name: 'custom',
+      component: CustomView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/cross',
+      name: 'cross',
+      component: CrossView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/nimbus',
+      name: 'nimbus',
+      component: NimbusView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -29,6 +50,16 @@ const router = createRouter({
       component: NotFoundView
     },
   ]
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+  if (to.meta.requiresAuth && !isLoggedIn) {
+    next({ name: 'login' });
+  } else {
+    next();
+  }
+});
+
+export default router;

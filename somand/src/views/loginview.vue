@@ -17,9 +17,9 @@ const fazerLogin = async () => {
 
         if (users.length > 0) {
             erroLogin.value = '';
+            localStorage.setItem('isLoggedIn', 'true');
             alert('Login bem-sucedido');
-            router.push('/moto');
-            // Redirecionar ou armazenar as informações do usuário
+            router.push('/categoria');
         } else {
             erroLogin.value = 'Usuário ou senha incorretos';
             alert('email ou senha errado');
